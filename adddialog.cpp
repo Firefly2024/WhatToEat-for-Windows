@@ -108,17 +108,17 @@ void addDish(const QString &name, const QString &fileLocation, int rating, doubl
 
 }
 
-void addTag(const QString &tagName) {
+void addTag(const QString &tagName,const int type=0) {
 
     QSqlQuery query;
-    query.prepare("INSERT OR IGNORE INTO tags (name) VALUES (:name)");
+    query.prepare("INSERT OR IGNORE INTO tags (name,type) VALUES (:name,:type)");
     query.bindValue(":name", tagName);
+    query.bindValue(":type", type);
 
     if (!query.exec()) {
         qDebug() << "Failed to add tag:" << query.lastError().text();
     }
-
-}
+}//这个地方要改
 
 int getIdByName(const QString &tableName, const QString &name) {
     QSqlQuery query;
@@ -165,6 +165,18 @@ void addDishTagRelation(const QString &dishName, const QString &tagName) {
 
 void AddDialog::addActions()
 {
+    QSqlDatabase db;
+    if(QSqlDatabase::contains("qt_sql_default_connection"))
+        db = QSqlDatabase::database("qt_sql_default_connection");
+    else
+        db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("dishes.db");
+
+    if (!db.open()) {
+        qDebug() << "Failed to open database:" << db.lastError().text();
+        return;
+    }
+
     QString name,sourcePath,place;
     int rating;
     double price;
@@ -187,35 +199,40 @@ void AddDialog::addActions()
     }else{
         return;
     }
-    QSqlDatabase db;
-    if(QSqlDatabase::contains("qt_sql_default_connection"))
-        db = QSqlDatabase::database("qt_sql_default_connection");
-    else
-        db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("dishes.db");
-
-    if (!db.open()) {
-        qDebug() << "Failed to open database:" << db.lastError().text();
-        return;
-    }
 
     addDish(name,sourcePath,rating,price,place);
 
+    if(place.startsWith(QString("家"))){
+        addDishTagRelation(name,"家园");
+    }
+    else if(place.startsWith(QString("学一"))){
+        addDishTagRelation(name,"学一");
+    }
+    else if(place.startsWith(QString("学五"))){
+        addDishTagRelation(name,"学一");
+    }
+    else if(place.startsWith(QString("燕"))){
+        addDishTagRelation(name,"燕南");
+    }
+    else if(place.startsWith(QString("农"))){
+        addDishTagRelation(name,"农园");
+    }
+
     if(ui->line_otherType->text()!=""){
-        addTag(ui->line_otherType->text());
+        addTag(ui->line_otherType->text(),3);
         addDishTagRelation(name,ui->line_otherType->text());
     }
 
     if(ui->line_otherFlavor->text()!=""){
-        addTag(ui->line_otherFlavor->text());
+        addTag(ui->line_otherFlavor->text(),4);
         addDishTagRelation(name,ui->line_otherFlavor->text());
     }
     if(ui->line_material->text()!=""){
-        addTag(ui->line_material->text());
+        addTag(ui->line_material->text(),5);
         addDishTagRelation(name,ui->line_material->text());
     }
     if(ui->rbOtherMethod->isChecked() && ui->line_method->text()!=""){
-        addTag(ui->line_method->text());
+        addTag(ui->line_method->text(),6);
         addDishTagRelation(name,ui->line_method->text());
     }
 

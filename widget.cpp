@@ -1,7 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "tujianwindow.h"
-//#include "manghe.h"
+#include "manghewindow.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -25,15 +25,16 @@ Widget::~Widget()
 
 void Widget::turntomh()
 {
-    // Manghe *mh=new Manghe();
-    // this->close();
-    // mh->show();
+    Ui_MangheWindow* mh=new Ui_MangheWindow(this);
+    mh->wparent=this;
+    this->close();
+    mh->show();
 } //盲盒模式槽连接函数
 
 void Widget::turntotj()
 {
     TujianWindow* tj=new TujianWindow();
     tj->wparent=this;
-    this->hide();
+    this->close();
     tj->show();
 } //图鉴模式槽连接函数

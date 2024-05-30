@@ -60,7 +60,6 @@ TujianWindow::TujianWindow(QWidget *parent)
     ui->lbPage->setStyleSheet("QLabel { color : rgb(208, 2, 27); }");
     ui->lbPage->setAlignment(Qt::AlignCenter);
 
-
     connect(ui->btnAdd,&QPushButton::clicked,this,&TujianWindow::addCards);
     connect(ui->btnTagSearch,&QPushButton::clicked,this,&TujianWindow::TabelModelOn);
     connect(ui->btnNameSearch,&QPushButton::clicked,this,&TujianWindow::NameModelOn);
@@ -339,8 +338,6 @@ void TujianWindow::on_btnLeft_clicked()
     ui->lbPage->setAlignment(Qt::AlignCenter);
     ui->lbPage->setText(QString("%1/%2").arg(page+1).arg(totalPage));
 }
-
-
 
 void TujianWindow::updateLabelSearch(const QString& text){
 

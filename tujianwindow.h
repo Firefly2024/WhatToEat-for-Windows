@@ -5,7 +5,6 @@
 #include "widget.h"
 #include <QMainWindow>
 
-
 namespace Ui {
 class TujianWindow;
 }
@@ -34,7 +33,6 @@ public slots:
     void clickedMessage();
 };
 
-
 class TujianWindow : public QMainWindow
 {
     Q_OBJECT
@@ -62,7 +60,6 @@ public slots:
     void backward();
 private slots:
     void on_btnRight_clicked();
-
     void on_btnLeft_clicked();
 
 private:

@@ -4,14 +4,17 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include "morethingmenu.h"
+#include <manghewindow.h>
 
-DetailCard::DetailCard(const int& _dish_id,TujianWindow* _tjparent,QWidget *parent)
+DetailCard::DetailCard(const int& _dish_id,int _mode,TujianWindow* _tjparent,QWidget *parent)
     : QWidget(parent)
     ,tjWindow(_tjparent)
     , ui(new Ui::DetailCard)
     ,model(new QStandardItemModel())
     ,dish_id(_dish_id)
 {
+    mode=_mode;
+
     ui->setupUi(this);
     this->setWindowTitle("");
 
@@ -224,6 +227,14 @@ void DetailCard::moreThings(){
 }
 
 void DetailCard::backward(){
-    tjWindow->show();
-    this->close();
+    if(mode==0){
+        tjWindow->show();
+        this->close();
+    }
+    else if(mode==1){
+        Ui_MangheWindow* mh=new Ui_MangheWindow(this);
+        mh->wparent=this;
+        this->close();
+        mh->show();
+    }
 }

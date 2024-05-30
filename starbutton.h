@@ -7,10 +7,6 @@
 #include <QPushButton>
 #include <QMouseEvent>
 #include <QDebug>
-
-
-
-
 #include <QPushButton>
 
 class StarButton : public QPushButton {

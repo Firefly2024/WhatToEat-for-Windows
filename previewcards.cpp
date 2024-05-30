@@ -91,7 +91,7 @@ PreviewCards::~PreviewCards()
 
 void PreviewCards::showDetail(const int& dish_id){
     //qDebug()<<"here"<<dish_id;
-    DetailCard* card = new DetailCard(dish_id,this->tjWindow);
+    DetailCard* card = new DetailCard(dish_id,0,this->tjWindow);
     this->tjWindow->hide();
     card->show();
 }

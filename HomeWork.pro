@@ -14,6 +14,7 @@ SOURCES += \
     listitemwidget.cpp \
     listitemwidget_2.cpp \
     main.cpp \
+    manghewindow.cpp \
     messagebutton.cpp \
     morethingmenu.cpp \
     notfoundwidget.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     detailcard.h \
     listitemwidget.h \
     listitemwidget_2.h \
+    manghewindow.h \
     messagebutton.h \
     morethingmenu.h \
     notfoundwidget.h \
@@ -38,6 +40,7 @@ HEADERS += \
 FORMS += \
     adddialog.ui \
     detailcard.ui \
+    manghewindow.ui \
     morethingmenu.ui \
     notfoundwidget.ui \
     previewcards.ui \

@@ -34,6 +34,8 @@ private slots:
     void starThree();
     void starFour();
     void starFive();
+    //void on_chbxLunch_stateChanged(int arg1);
+    //void on_chbkDinner_clicked(bool checked);
 };
 
 #endif // ADDDIALOG_H

@@ -15,7 +15,7 @@ class DetailCard : public QWidget
     Q_OBJECT
 
 public:
-    explicit DetailCard(const int& _dish_id,TujianWindow* tjparent,QWidget *parent = nullptr);
+    explicit DetailCard(const int& _dish_id,int _mode,TujianWindow* tjparent=nullptr,QWidget *parent = nullptr);
     ~DetailCard();
 
 
@@ -29,6 +29,7 @@ private:
     TujianWindow* tjWindow;
     Ui::DetailCard *ui;
     QStandardItemModel* model;
+    int mode;//mode为0是图鉴模式，mode为1是盲盒模式
     int dish_id;
 };
 
